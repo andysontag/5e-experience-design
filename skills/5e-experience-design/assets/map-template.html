@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- REPLACE: page title -->
+<title>{{EXPERIENCE_NAME}} — 5E Design Map</title>
+<style>
+  /* ============================================================
+     5E DESIGN MAP — self-contained. No external dependencies.
+     Type scale 1.200. 8pt spacing grid. Phase accents pass AA.
+     Structure mirrors the model: meaningful outcomes run ACROSS
+     the arc, the five phases sit under them, and each phase names
+     the feeling it is designed to produce.
+     ============================================================ */
+
+  :root {
+    --t-xs: 0.694rem; --t-sm: 0.833rem; --t-base: 1rem;
+    --t-md: 1.2rem;   --t-lg: 1.44rem;  --t-xl: 2.074rem; --t-2xl: 2.488rem;
+
+    --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+    --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+
+    --radius: 14px; --radius-nest: 9px;
+
+    --canvas:    #F7F7F5;
+    --surface:   #FFFFFF;
+    --ink:       #1A1A1A;
+    --ink-muted: #5C5C58;
+    --ink-faint: #8A8A85;
+    --rule:      rgba(0,0,0,0.08);
+    --shadow:    0 1px 2px rgba(0,0,0,0.04), 0 6px 20px rgba(0,0,0,0.06);
+
+    --excitement: #B45309;  --excitement-soft: #FDF0E2;
+    --entry:      #0F766E;  --entry-soft:      #E4F2F0;
+    --engagement: #1D4E89;  --engagement-soft: #E7EEF7;
+    --exit:       #5B3A9B;  --exit-soft:       #EFEAF9;
+    --extension:  #B03A25;  --extension-soft:  #FBEAE6;
+
+    --outcome-bg: #14141A;
+    --outcome-ink:#F2F2EF;
+
+    --warn: #92400E; --warn-soft: #FDF4E3; --warn-rule: rgba(146,64,14,0.22);
+    --span: #1D4E89;
+    --dotted: rgba(176,58,37,0.45);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --canvas:#16161A; --surface:#1F1F24; --ink:#E8E8E6;
+      --ink-muted:#A8A8A4; --ink-faint:#777772;
+      --rule:rgba(255,255,255,0.10); --shadow:none;
+      --excitement:#F0A868; --excitement-soft:rgba(240,168,104,0.12);
+      --entry:#5EC2B4;      --entry-soft:rgba(94,194,180,0.12);
+      --engagement:#7FB0DE; --engagement-soft:rgba(127,176,222,0.12);
+      --exit:#B49BE8;       --exit-soft:rgba(180,155,232,0.12);
+      --extension:#E89478;  --extension-soft:rgba(232,148,120,0.12);
+      --outcome-bg:#26262E; --outcome-ink:#F2F2EF;
+      --warn:#E8B563; --warn-soft:rgba(232,181,99,0.10); --warn-rule:rgba(232,181,99,0.25);
+      --span:#7FB0DE; --dotted:rgba(232,148,120,0.45);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: var(--s-7) var(--s-5) var(--s-8);
+    background: var(--canvas);
+    color: var(--ink);
+    font: var(--t-base)/1.55 ui-sans-serif, -apple-system, "Segoe UI", Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+
+  /* ---------- header ---------- */
+  header { margin-bottom: var(--s-5); }
+  .state-line { margin: var(--s-3) 0 0; padding: var(--s-2) var(--s-3); border-left: 3px solid var(--rule-strong, #9a9a9a); background: rgba(128,128,128,.10); font-size: .82rem; line-height: 1.5; color: var(--ink-2, inherit); border-radius: 0 4px 4px 0; }
+  .eyebrow {
+    margin: 0 0 var(--s-2);
+    font-size: var(--t-xs); letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  h1 {
+    margin: 0 0 var(--s-3);
+    font-size: var(--t-2xl); line-height: 1.1; letter-spacing: -0.02em; font-weight: 600;
+  }
+  .meta { list-style: none; display: flex; flex-wrap: wrap; gap: var(--s-2); margin: 0; padding: 0; }
+  .meta li {
+    font-size: var(--t-sm); color: var(--ink-muted);
+    background: var(--surface); border: 1px solid var(--rule);
+    padding: 3px var(--s-3); border-radius: 999px;
+  }
+
+  /* ---------- the outcomes block ---------- */
+  .outcomes {
+    background: var(--outcome-bg); color: var(--outcome-ink);
+    border-radius: var(--radius);
+    padding: var(--s-5) var(--s-5) var(--s-4);
+    margin: var(--s-5) 0 0; box-shadow: var(--shadow);
+  }
+  .outcomes .label {
+    display:block; margin-bottom: var(--s-3);
+    font-size: var(--t-xs); letter-spacing:0.16em; text-transform:uppercase;
+    color: rgba(242,242,239,0.55);
+  }
+  .outcomes p { margin: 0 0 var(--s-3); font-size: var(--t-md); line-height:1.4; max-width: 62ch; }
+  .outcomes p:last-child { margin-bottom: 0; }
+  .outcomes .ambition {
+    font-size: var(--t-lg); line-height:1.3; font-weight:500;
+    letter-spacing:-0.01em; max-width: 48ch;
+  }
+  .outcomes .behaviour {
+    font-size: var(--t-sm); color: rgba(242,242,239,0.72);
+    border-top: 1px solid rgba(242,242,239,0.16);
+    padding-top: var(--s-3); margin-top: var(--s-3); max-width: 70ch;
+  }
+  .outcomes .behaviour b { font-weight:600; color: rgba(242,242,239,0.9); }
+
+  /* from -> to */
+  .change { display:grid; grid-template-columns: 1fr auto 1fr; gap: var(--s-3);
+            align-items:start; margin: var(--s-3) 0 0; }
+  .change .k { display:block; font-size: var(--t-xs); letter-spacing:0.14em;
+               text-transform:uppercase; color: rgba(242,242,239,0.5); margin-bottom: var(--s-1); }
+  .change .cell p { font-size: var(--t-sm); line-height:1.45; margin:0;
+                    color: rgba(242,242,239,0.88); max-width:none; }
+  .change .arrow { align-self:center; color: rgba(242,242,239,0.4); font-size: var(--t-md); }
+  @media (max-width: 640px) { .change { grid-template-columns: 1fr; } .change .arrow { display:none; } }
+
+  /* the three Meaningful Outcomes */
+  .meanings { display:flex; flex-wrap:wrap; gap: var(--s-2); margin: var(--s-3) 0 0; padding:0; }
+  .meanings li { list-style:none; font-size: var(--t-sm); letter-spacing:0.02em;
+                 border:1px solid rgba(242,242,239,0.28); border-radius:999px;
+                 padding: 3px var(--s-3); color: var(--outcome-ink); }
+  .meanings-src { display:block; margin-top: var(--s-2); font-size: var(--t-xs);
+                  color: rgba(242,242,239,0.42); }
+
+  /* ---------- the emotional journey curve ---------- */
+  /* ---------- the journey diagram ---------- */
+  .journey { margin-top: var(--s-6); }
+  .journey svg { display:block; width:100%; height:auto; overflow:visible; }
+  .arcwrap { padding-top: var(--s-5); margin-bottom: calc(-1 * var(--s-3)); }
+  .span { fill:none; stroke: var(--span); stroke-width:1.6; }
+  .spanlabel { font-size:15px; font-weight:500; fill: var(--ink-muted); letter-spacing:0.01em; }
+  .curve-line { fill:none; stroke:url(#arcgrad); stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+  .curve-dot { stroke: var(--canvas); stroke-width:3.5; }
+  .axis { stroke: var(--rule); stroke-width:1; }
+  .plabel { font-size:17px; font-weight:600; letter-spacing:-0.01em; }
+
+  /* ---------- five columns ---------- */
+  .cols {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    margin-top: 0;
+  }
+  @media (max-width: 900px) { .cols { grid-template-columns: repeat(2, 1fr); gap: var(--s-4); } }
+  @media (max-width: 560px) { .cols { grid-template-columns: 1fr; } }
+
+  .col {
+    padding: 0 var(--s-4);
+    border-left: 1.5px dotted var(--dotted);
+    display: flex; flex-direction: column; gap: var(--s-3);
+  }
+  .col:last-child { border-right: 1.5px dotted var(--dotted); }
+  @media (max-width: 900px) {
+    .col { border-right: none; }
+    .col:last-child { border-right: none; }
+  }
+
+  .excitement { --accent: var(--excitement); --soft: var(--excitement-soft); }
+  .entry      { --accent: var(--entry);      --soft: var(--entry-soft); }
+  .engagement { --accent: var(--engagement); --soft: var(--engagement-soft); }
+  .exit       { --accent: var(--exit);       --soft: var(--exit-soft); }
+  .extension  { --accent: var(--extension);  --soft: var(--extension-soft); }
+
+  .feel { background: var(--soft); border-radius: var(--radius-nest); padding: var(--s-3); }
+  .feel .label {
+    display:block; margin-bottom: var(--s-1);
+    font-size: var(--t-xs); letter-spacing:0.14em; text-transform:uppercase;
+    color: var(--accent); opacity:0.9;
+  }
+  .feel p { margin:0; font-size: var(--t-sm); line-height:1.45; font-weight:500; font-style:italic; }
+  .feel .untested {
+    display:block; margin-top: var(--s-2);
+    font-size: var(--t-xs); color: var(--ink-faint); font-style:italic; font-weight:400;
+  }
+
+  ul.moves { margin:0; padding-left: var(--s-4); }
+  ul.moves li { font-size: var(--t-sm); line-height:1.5; margin-bottom: var(--s-2); color: var(--ink); }
+  ul.moves li.unset { list-style:none; margin-left: calc(-1 * var(--s-4)); color: var(--ink-faint); font-style:italic; }
+
+  .flag {
+    margin:0; padding: var(--s-2) var(--s-3);
+    background: var(--warn-soft); border: 1px solid var(--warn-rule);
+    border-radius: var(--radius-nest);
+    font-size: var(--t-xs); line-height:1.4; color: var(--warn);
+  }
+
+  .col.open .open-note { font-size: var(--t-sm); color: var(--ink-muted); }
+  .col.open .open-note ul { margin: var(--s-2) 0 0; padding-left: var(--s-4); }
+  .col.open .open-note li { margin-bottom: var(--s-1); }
+
+  /* ---------- summary ---------- */
+  .summary {
+    margin-top: var(--s-5); background: var(--surface);
+    border: 1px solid var(--rule); border-radius: var(--radius);
+    padding: var(--s-5); box-shadow: var(--shadow);
+  }
+  .summary h2 { margin: 0 0 var(--s-3); font-size: var(--t-md); font-weight: 600; }
+  .summary ol { margin: 0; padding-left: var(--s-5); }
+  .summary li { margin-bottom: var(--s-2); font-size: var(--t-sm); line-height: 1.5; }
+  .summary strong { display: block; color: var(--ink); }
+  .summary span { color: var(--ink-muted); }
+
+  /* ---------- footer / attribution ----------
+     This travels. A map gets emailed to a client and pinned in a board
+     long after the session. The credit line is a quiet provenance mark,
+     not an advert. Restraint keeps it from being deleted. */
+  footer {
+    margin-top: var(--s-6); padding-top: var(--s-4);
+    border-top: 1px solid var(--rule);
+    font-size: var(--t-sm); color: var(--ink-faint);
+    display: flex; flex-wrap: wrap; align-items: baseline;
+    justify-content: space-between; gap: var(--s-2) var(--s-5);
+  }
+  footer .credit { color: var(--ink-muted); }
+  footer .credit strong { color: var(--ink); font-weight: 600; }
+  footer a { color: var(--engagement); text-decoration: none; border-bottom: 1px solid rgba(29,78,137,0.35); }
+  footer a:hover { border-bottom-color: currentColor; }
+  @media (prefers-color-scheme: dark) { footer a { border-bottom-color: rgba(127,176,222,0.4); } }
+
+  @media print {
+    body { background:#fff; padding:0; font-size:10pt; }
+    .outcomes, .summary { box-shadow:none; border:1px solid #ddd; }
+    .outcomes { background:#fff; color:#111; border:1px solid #999; }
+    .outcomes .label, .outcomes .behaviour, .change .k, .change .cell p,
+    .meanings-src { color:#555; }
+    .meanings li { border-color:#999; color:#111; }
+    .cols { grid-template-columns: repeat(5, 1fr); }
+    .col, .summary { break-inside: avoid; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============================================================
+       HEADER — REPLACE the name and the meta chips. Delete chips
+       that don't apply.
+       ============================================================ -->
+  <header>
+    <p class="eyebrow">5E Design Map</p>
+    <h1>{{EXPERIENCE_NAME}}</h1>
+    <ul class="meta">
+      <li>{{EXPERIENCE_TYPE}}</li>
+      <li>{{AUDIENCE}}</li>
+      <li>{{DURATION}}</li>
+    </ul>
+    <!-- STATE LINE — DELETE this whole <p> unless the threshold in
+         references/output-format.md is met. It appears only when the map
+         records moves with no Meaningful Outcomes and no stated feelings. -->
+    <p class="state-line">Moves only: the Meaningful Outcomes and the emotional journey for this experience have not been designed yet.</p>
+  </header>
+
+  <!-- ============================================================
+       THE LADDER — ambition, what it is for, the core shift, the three
+       Meaningful Outcomes, behaviour. All in the user's own words, top
+       to bottom, most abstract first.
+       {{AMBITION}} is what they said when asked what would happen if it
+       went really well, before any constraint was applied. Keep it even
+       if it is grand; it is the altitude the design was drawn from.
+       {{MEANINGFUL_OUTCOMES}} is what the experience is for, in prose.
+       The three chips are the Meaningful Outcomes they picked from
+       Shedroff's list. {{EXISTING_STATE}} and {{PREFERRED_STATE}} are
+       the "from" and the "to" of the core shift. {{BEHAVIOUR}} is what
+       you'd see afterwards, and it keeps the others honest.
+       If a rung stayed thin, say so in their words rather than
+       dressing it up.
+       ============================================================ -->
+  <section class="outcomes">
+    <span class="label">The ambition</span>
+    <p class="ambition">{{AMBITION}}</p>
+
+    <span class="label" style="margin-top:var(--s-4)">What it is for</span>
+    <p>{{MEANINGFUL_OUTCOMES}}</p>
+
+    <div class="change">
+      <div class="cell"><span class="k">From</span><p>{{EXISTING_STATE}}</p></div>
+      <div class="arrow">&rarr;</div>
+      <div class="cell"><span class="k">To</span><p>{{PREFERRED_STATE}}</p></div>
+    </div>
+
+    <span class="label" style="margin-top:var(--s-4)">Meaningful outcomes</span>
+    <ul class="meanings">
+      <li>{{MEANING_1}}</li><li>{{MEANING_2}}</li><li>{{MEANING_3}}</li>
+    </ul>
+    <span class="meanings-src">Meaningful Outcomes after Nathan Shedroff, <em>Making Meaning</em> (Diller, Shedroff &amp; Rhea)</span>
+
+    <p class="behaviour"><b>What you'd see afterwards:</b> {{BEHAVIOUR}}</p>
+  </section>
+
+  <!-- ============================================================
+       THE 5E JOURNEY — the canonical diagram.
+
+       One big arc spans all five phases, labelled "Meaningful
+       outcomes", because that is what the model claims: the outcomes
+       are carried across the whole thing, not parked at one end.
+       Beneath it, five columns, one per phase.
+
+       THE ARC IS REAL DATA, not decoration. Its shape is the emotional
+       journey they designed. Set each phase's height from this table
+       and use the SAME number in the polyline and in the matching
+       <circle cy="...">:
+
+            peak    y = 40
+            high    y = 78
+            mid     y = 116
+            low     y = 154
+            trough  y = 188
+
+       x positions are fixed: 96, 288, 480, 672, 864.
+
+       A design that starts braced, opens up, climbs, then settles:
+            96,154  288,116  480,78  672,40  864,116
+
+       {{CURVE_POINTS}} is that list. Each {{..._CY}} repeats the y you
+       used for that phase.
+
+       Do not add a written summary of the curve. The picture is the
+       reading, and a paragraph interpreting it would be your words on
+       their document.
+       ============================================================ -->
+  <section class="journey">
+    <div class="arcwrap">
+      <svg viewBox="0 0 960 250" role="img" aria-label="The 5E journey: meaningful outcomes carried across five phases">
+        <defs>
+          <linearGradient id="arcgrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stop-color="var(--excitement)"/>
+            <stop offset="25%"  stop-color="var(--entry)"/>
+            <stop offset="50%"  stop-color="var(--engagement)"/>
+            <stop offset="75%"  stop-color="var(--exit)"/>
+            <stop offset="100%" stop-color="var(--extension)"/>
+          </linearGradient>
+          <marker id="tip" viewBox="0 0 10 10" refX="8" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9 z" fill="var(--span)"/>
+          </marker>
+        </defs>
+
+        <!-- the span: meaningful outcomes carried across all five -->
+        <path class="span" d="M 96 30 Q 480 -34 864 30" marker-end="url(#tip)"/>
+        <text class="spanlabel" x="480" y="16" text-anchor="middle">Meaningful outcomes</text>
+
+        <!-- the emotional journey itself -->
+        <polyline class="curve-line" points="{{CURVE_POINTS}}"/>
+        <circle class="curve-dot" cx="96"  cy="{{EXCITEMENT_CY}}" r="6" fill="var(--excitement)"/>
+        <circle class="curve-dot" cx="288" cy="{{ENTRY_CY}}"      r="6" fill="var(--entry)"/>
+        <circle class="curve-dot" cx="480" cy="{{ENGAGEMENT_CY}}" r="6" fill="var(--engagement)"/>
+        <circle class="curve-dot" cx="672" cy="{{EXIT_CY}}"       r="6" fill="var(--exit)"/>
+        <circle class="curve-dot" cx="864" cy="{{EXTENSION_CY}}"  r="6" fill="var(--extension)"/>
+
+        <line class="axis" x1="20" y1="212" x2="940" y2="212"/>
+
+        <text class="plabel" x="96"  y="234" text-anchor="middle" fill="var(--excitement)">Excitement</text>
+        <text class="plabel" x="288" y="234" text-anchor="middle" fill="var(--entry)">Entry</text>
+        <text class="plabel" x="480" y="234" text-anchor="middle" fill="var(--engagement)">Engagement</text>
+        <text class="plabel" x="672" y="234" text-anchor="middle" fill="var(--exit)">Exit</text>
+        <text class="plabel" x="864" y="234" text-anchor="middle" fill="var(--extension)">Extension</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THE FIVE COLUMNS — in the USER'S OWN words.
+
+       "I FEEL…" is the sharpened intention in the participant's voice,
+       never a forecast of what people will probably feel. Write it as
+       the designer gave it, first person, and keep compound or
+       contradictory pairs intact ("annoyed and inspired") rather than
+       tidying them into one word. If it never got sharpened, keep
+       their coarse word and add:
+           <span class="untested">Not sharpened — untested, not unsound.</span>
+
+       MOVES — one <li> ships; most phases need two or three. Copy it.
+       In the mid-session DRAFT map, every phase has:
+           <li class="unset">Not designed yet</li>
+
+       TRAP BADGE — Excitement carries the only exemplar. Delete it
+       unless you flagged something for that phase. Two or three across
+       the whole map, maximum. If they FIXED it in the conversation,
+       write it in the past tense so the map records the change rather
+       than accusing the current design of a fault it no longer has.
+
+       A PHASE NEVER REACHED keeps its column but carries the open
+       questions instead of moves; see the Extension column below.
+
+       BEFORE DELIVERING: strip every HTML comment from the file,
+       including this one. It is going in front of a client.
+       ============================================================ -->
+  <main class="cols">
+
+    <section class="col excitement">
+      <div class="feel">
+        <span class="label">I feel…</span>
+        <p>{{EXCITEMENT_FEEL}}</p>
+      </div>
+      <ul class="moves">
+        <li>{{EXCITEMENT_MOVE_1}}</li>
+      </ul>
+      <p class="flag">{{EXCITEMENT_TRAP}}</p>
+    </section>
+
+    <section class="col entry">
+      <div class="feel">
+        <span class="label">I feel…</span>
+        <p>{{ENTRY_FEEL}}</p>
+      </div>
+      <ul class="moves">
+        <li>{{ENTRY_MOVE_1}}</li>
+      </ul>
+    </section>
+
+    <section class="col engagement">
+      <div class="feel">
+        <span class="label">I feel…</span>
+        <p>{{ENGAGEMENT_FEEL}}</p>
+      </div>
+      <ul class="moves">
+        <li>{{ENGAGEMENT_MOVE_1}}</li>
+      </ul>
+    </section>
+
+    <section class="col exit">
+      <div class="feel">
+        <span class="label">I feel…</span>
+        <p>{{EXIT_FEEL}}</p>
+      </div>
+      <ul class="moves">
+        <li>{{EXIT_MOVE_1}}</li>
+      </ul>
+    </section>
+
+    <section class="col extension open">
+      <div class="feel">
+        <span class="label">I feel…</span>
+        <p>{{EXTENSION_FEEL}}</p>
+      </div>
+      <div class="open-note">
+        Not designed yet. Open questions:
+        <ul>
+          <li>{{EXTENSION_OPEN_Q_1}}</li>
+          <li>{{EXTENSION_OPEN_Q_2}}</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       STRATEGIES — only include if strategies came up in the
+       conversation. Two <li> shown as a pattern; match the number you
+       actually raised, and keep them consistent with any badges above.
+       Delete the whole section otherwise.
+
+       These are OFFERED, never asserted. The heading says "could be
+       relevant" because you do not know their context well enough to
+       know that it is. Write each one as something to consider, not as
+       a diagnosis of their design.
+       ============================================================ -->
+  <section class="summary">
+    <h2>Gathering Design Strategies that could be relevant to you</h2>
+    <ol>
+      <li><strong>{{PITFALL_1_TITLE}}</strong><span>{{PITFALL_1_NOTE}}</span></li>
+      <li><strong>{{PITFALL_2_TITLE}}</strong><span>{{PITFALL_2_NOTE}}</span></li>
+    </ol>
+  </section>
+
+  <!-- ============================================================
+       ATTRIBUTION — keep this footer intact. Replace {{DATE}} only.
+       The credit line, version and link stay as they are: they are how
+       someone who receives this map finds where the model came from.
+       The "v1.0" is the version of the MODEL, not of this skill. It is
+       deliberately not the skill's version number and does not track it.
+       Leave it alone.
+       ============================================================ -->
+  <footer>
+    <span class="credit">
+      Designed with the <strong>5E Experience Design Model</strong>, created by Andy Sontag · v1.0
+    </span>
+    <span class="meta-line">
+      <a href="https://andysontag.com/5e-model?utm_source=5e-skill&amp;utm_medium=design-map&amp;utm_campaign=5e-experience-design">andysontag.com/5e-model</a>
+      · {{DATE}}
+    </span>
+  </footer>
+
+</div>
+</body>
+</html>
