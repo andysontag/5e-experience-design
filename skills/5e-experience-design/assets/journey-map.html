@@ -1,0 +1,538 @@
+<title>5E Journey Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style id="map-css">
+/* Layout: overview grid, then the 5E arch (Meaningful Outcomes over five phase arrows, emotions inside) with phase columns below; step-by-step guide on the right. */
+:root{
+  --bg:#f3f4f1; --surface:#ffffff; --sunk:#eceee9; --ink:#1c2226; --ink-2:#4d575d; --ink-3:#7c868b;
+  --rule:#d9ddd8; --accent:#d0582f; --accent-soft:#f6ddd2; --on-accent:#ffffff;
+  --mo:#f7dc1b; --mo-soft:#fbf1a6; --on-mo:#1c2226;
+  --ok:#2f7d5b; --ok-soft:#dcefe4; --thin:#a86b00; --thin-soft:#f7e8c7; --empty:#a3abaf;
+  --p1:#c9572e; --p2:#b88414; --p3:#2f7d5b; --p4:#2d6a96; --p5:#7a4d9a;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Instrument Sans","Helvetica Neue",Arial,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#12171a; --surface:#1a2125; --sunk:#151b1e; --ink:#e8ece9; --ink-2:#b3bdc0; --ink-3:#869195;
+  --rule:#2c363b; --accent:#ef7a50; --accent-soft:#3a2219; --on-accent:#1a0d08;
+  --mo:#e9cd1f; --mo-soft:#4a4214; --on-mo:#15191b;
+  --ok:#5cc393; --ok-soft:#173226; --thin:#e0a93c; --thin-soft:#3a2d12; --empty:#5e686c;
+  --p1:#ef7a50; --p2:#e0b04a; --p3:#5cc393; --p4:#6aa9d8; --p5:#b690d6; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#12171a; --surface:#1a2125; --sunk:#151b1e; --ink:#e8ece9; --ink-2:#b3bdc0; --ink-3:#869195;
+  --rule:#2c363b; --accent:#ef7a50; --accent-soft:#3a2219; --on-accent:#1a0d08;
+  --mo:#e9cd1f; --mo-soft:#4a4214; --on-mo:#15191b;
+  --ok:#5cc393; --ok-soft:#173226; --thin:#e0a93c; --thin-soft:#3a2d12; --empty:#5e686c;
+  --p1:#ef7a50; --p2:#e0b04a; --p3:#5cc393; --p4:#6aa9d8; --p5:#b690d6; color-scheme:dark; }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:20px;padding-block:24px 40px}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:24px;align-items:start}
+@media (max-width:1000px){.layout{grid-template-columns:1fr}}
+
+/* ---------- map side ---------- */
+.map{background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.title-row{display:flex;flex-direction:column;gap:2px}
+.title-in{font-family:var(--display);font-size:32px;font-weight:800;border:0;background:transparent;padding:0;width:100%;line-height:1.1}
+.title-in::placeholder,.meta-in::placeholder{color:var(--ink-3)}
+.meta-in{border:0;background:transparent;padding:0;width:100%;color:var(--ink-2);font-size:14px}
+.tagline{font-size:13px;color:var(--ink-3);font-style:italic;margin:4px 0 0}
+.mo-lines{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--ink-2)}
+.mo-lines .quote{font-family:var(--display);font-size:19px;color:var(--ink);font-weight:500}
+.mo-lines b{font-weight:600;color:var(--ink)}
+.state-line{margin:0;padding:8px 12px;border-radius:8px;background:var(--thin-soft);color:var(--thin);font-size:13px}
+
+.overview{display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:12px;background:var(--sunk)}
+.ov-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.ov-head h2{font-size:15px}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--ink-3)}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.legend .l-f::before{background:var(--ok-soft);border:1px solid var(--ok)}
+.legend .l-t::before{background:var(--thin-soft);border:1px solid var(--thin)}
+.legend .l-e::before{border:1px dashed var(--empty)}
+.layer{display:grid;grid-template-columns:136px minmax(0,1fr);gap:8px;align-items:center}
+@media (max-width:560px){.layer{grid-template-columns:1fr}}
+.layer-name{font-size:12px;font-weight:600;color:var(--ink-2);display:flex;gap:6px;align-items:center}
+.layer-name svg{width:14px;height:14px;flex:none}
+.cells{display:grid;gap:5px}
+.cells.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.cells.c5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.cell{border-radius:7px;padding:6px 7px;font-size:11.5px;line-height:1.25;cursor:pointer;border:1px solid transparent;text-align:left;background:var(--surface);min-width:0;overflow-wrap:anywhere;display:flex;flex-direction:column;gap:1px}
+.cell small{font-size:10px;opacity:.8}
+.cell[data-s="filled"]{background:var(--ok-soft);color:var(--ok);border-color:var(--ok-soft)}
+.cell[data-s="thin"]{background:var(--thin-soft);color:var(--thin);border-color:var(--thin-soft)}
+.cell[data-s="empty"]{border:1px dashed var(--empty);color:var(--ink-3)}
+.cell.here{outline:2px solid var(--accent);outline-offset:1px}
+
+.arch{width:100%;height:auto;display:block}
+.band{fill:none;stroke-width:58;transition:opacity .4s}
+.band-text{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:.14em}
+.hump{fill:none;stroke-width:30;stroke-linecap:butt;cursor:pointer;transition:stroke .3s}
+.head{cursor:pointer;transition:fill .3s}
+.guide{stroke:var(--rule);stroke-width:1.5;stroke-dasharray:2 5}
+.curve{fill:none;stroke:var(--ink);stroke-width:3}
+.curve.dash{stroke:var(--empty);stroke-width:1.5;stroke-dasharray:5 6}
+.dot{cursor:pointer}
+.dot.unset{fill:var(--surface);stroke:var(--empty);stroke-width:2;stroke-dasharray:3 3}
+.em-label{fill:var(--ink-3);font-size:12px;letter-spacing:.12em;font-family:var(--mono)}
+.here-ring{fill:none;stroke:var(--accent);stroke-width:3}
+[data-stage="em"] .g-mo,[data-stage="wh"] .g-mo{opacity:.6}
+[data-stage="mo"] .g-em,[data-stage="wh"] .g-em{opacity:.45}
+[data-stage="mo"] .g-wh,[data-stage="em"] .g-wh{opacity:.5}
+.g-mo,.g-em,.g-wh{transition:opacity .4s}
+
+.cols{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+@media (max-width:780px){.cols{grid-template-columns:1fr}}
+.col{border-left:4px solid var(--mo);padding:2px 0 2px 10px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.col-name{background:none;border:0;padding:0;text-align:left;cursor:pointer;font-family:var(--display);font-weight:800;font-size:15px;letter-spacing:.06em;text-transform:uppercase}
+.col-name:hover{color:var(--accent)}
+.col-desc{font-size:11px;color:var(--ink-3);line-height:1.35;text-transform:uppercase;letter-spacing:.03em}
+.col-feel{font-size:13px;overflow-wrap:anywhere}
+.muted{color:var(--ink-3);font-size:12px;font-style:italic}
+details.tps{font-size:12px;color:var(--ink-2)}
+details.tps summary{cursor:pointer;font-weight:600;color:var(--ink);font-size:12px}
+details.tps .tp{margin:6px 0 0;padding-left:8px;border-left:2px solid var(--rule)}
+details.tps .tp-name{font-weight:600;color:var(--ink)}
+details.tps ul{margin:2px 0 0;padding-left:16px;overflow-wrap:anywhere}
+.add-tp-mini{background:none;border:1px dashed var(--empty);border-radius:7px;padding:3px 8px;font-size:11px;color:var(--ink-3);cursor:pointer;align-self:flex-start}
+.add-tp-mini:hover{border-color:var(--accent);color:var(--accent)}
+.foot{font-size:12px;color:var(--ink-3)}
+.foot a{color:var(--ink-2)}
+
+/* ---------- steps side ---------- */
+.steps{background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);max-height:calc(100vh - 32px);overflow:auto}
+@media (max-width:1000px){.steps{position:static;max-height:none}}
+.steps-top{display:flex;justify-content:space-between;align-items:baseline;padding:2px 4px 8px}
+.steps-top h2{font-size:17px}
+.bar{height:4px;border-radius:4px;background:var(--sunk);overflow:hidden;margin:0 4px 8px}
+.bar i{display:block;height:100%;background:var(--accent);transition:width .4s}
+.stage-head{display:flex;gap:10px;align-items:center;width:100%;background:none;border:0;padding:10px 8px;border-radius:10px;cursor:pointer;text-align:left}
+.stage-head:hover{background:var(--sunk)}
+.stage-ico{width:28px;height:28px;flex:none;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--empty);color:var(--ink-3)}
+.stage-ico svg{width:16px;height:16px}
+.stage.active .stage-ico{border-color:var(--accent);color:var(--accent)}
+.stage.done .stage-ico{background:var(--ok);border-color:var(--ok);color:var(--surface)}
+.stage-name{font-family:var(--display);font-weight:700;font-size:16px;flex:1}
+.stage:not(.active):not(.done) .stage-name{color:var(--ink-3)}
+.stage-count{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.stage-intro{margin:0 4px 8px 43px;font-size:12.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:6px}
+.stage-intro strong{color:var(--ink)}
+.substeps{list-style:none;margin:0 0 6px 21px;padding:0 0 0 22px;display:flex;flex-direction:column;gap:2px;border-left:1.5px solid var(--rule)}
+.sub-btn{display:flex;gap:8px;align-items:center;background:none;border:0;padding:5px 6px;border-radius:8px;cursor:pointer;text-align:left;font-size:14px;color:var(--ink-2);width:100%}
+.sub-btn:hover{background:var(--sunk)}
+.tick{width:16px;height:16px;flex:none;border-radius:50%;border:1.5px solid var(--empty);display:grid;place-items:center}
+.sub.done .tick{background:var(--ok);border-color:var(--ok)}
+.sub.done .tick::after{content:"";width:6px;height:3px;border:2px solid var(--surface);border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px)}
+.sub.current .tick{border-color:var(--accent);border-width:5px}
+.sub.current .sub-btn{color:var(--ink);font-weight:600}
+.sub.skipped .tick{border-style:dashed}
+.work{margin:6px 0 10px 6px;padding:14px;border-radius:12px;background:var(--sunk);display:flex;flex-direction:column;gap:10px}
+.work-q{font-family:var(--display);font-size:19px;line-height:1.25;font-weight:500}
+.work-why{font-size:13px;color:var(--ink-2)}
+.work textarea,.work input{width:100%;box-sizing:border-box;background:var(--surface);border:1px solid var(--rule);border-radius:9px;padding:9px 10px;font-size:14px;resize:vertical}
+.work textarea{min-height:76px}
+.pair{display:grid;gap:6px}
+.pair .arrow{text-align:center;color:var(--ink-3);font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--rule);background:var(--surface);border-radius:999px;padding:4px 10px;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.cite{font-size:11px;color:var(--ink-3)}
+.levels{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.levels .label{width:100%}
+.tp-edit{display:flex;flex-direction:column;gap:6px;padding:10px;border-radius:10px;background:var(--surface);border:1px solid var(--rule)}
+.tp-edit .row{display:flex;gap:6px;align-items:center}
+.tp-edit .row input{flex:1;min-width:0;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:4px 2px;font-weight:600;background:transparent}
+.tp-edit textarea{min-height:60px;background:var(--bg)}
+.tp-del{background:none;border:0;color:var(--ink-3);cursor:pointer;font-size:12px;text-decoration:underline;text-underline-offset:3px}
+.add-tp{background:none;border:1.5px dashed var(--empty);border-radius:10px;padding:8px;cursor:pointer;color:var(--ink-2);font-size:13px}
+.add-tp:hover{border-color:var(--accent);color:var(--accent)}
+.coach-say{display:flex;gap:10px;align-items:flex-start;background:var(--accent-soft);border-radius:10px;padding:10px 12px;font-size:14px}
+.coach-say .who{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);flex:none;padding-top:3px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.primary{background:var(--accent);color:var(--on-accent);border:0;border-radius:9px;padding:8px 16px;font-weight:600;cursor:pointer}
+.secondary{background:var(--surface);border:1px solid var(--rule);border-radius:9px;padding:7px 12px;cursor:pointer;font-size:13px}
+.link{background:none;border:0;padding:4px;color:var(--ink-3);font-size:12px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.nudge{font-size:12px;color:var(--thin)}
+.flash{margin:4px 0 8px;padding:10px 12px;border-radius:10px;background:var(--ok-soft);color:var(--ok);font-size:14px;font-weight:500}
+.finish{display:flex;flex-direction:column;gap:10px;padding:8px 4px}
+.save{font-size:11px;color:var(--ink-3);padding:6px 4px 0}
+.settings{display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:12px;color:var(--ink-3)}
+.settings select{background:var(--surface);border:1px solid var(--rule);border-radius:7px;padding:3px 6px;font-size:12px}
+.copy-area{width:100%;min-height:120px;font-family:var(--mono);font-size:12px;margin-top:16px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div id="app"></div>
+
+<script type="application/json" id="map-state">{"lab": false, "title": "", "meta": "", "ambition": "", "from": "", "to": "", "meanings": [], "behaviour": "", "feel": ["", "", "", "", ""], "level": ["", "", "", "", ""], "tps": [[{"name": "", "moves": ""}], [{"name": "", "moves": ""}], [{"name": "", "moves": ""}], [{"name": "", "moves": ""}], [{"name": "", "moves": ""}]], "accepted": {}, "pushed": {}, "skipped": {}, "coachMsg": {}, "active": "", "flash": "", "coach": true}</script>
+
+<script id="map-js">
+(function(){
+"use strict";
+var FONT_LINK='<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">';
+var PH=[
+ {n:"Excitement",w:"before they arrive",d:"Awareness and attraction to the experience",q:"Why would anyone care enough to show up fully?"},
+ {n:"Entry",w:"in the first ninety seconds",d:"Entering into the designed experience",q:"How do people actually arrive, mentally and socially?"},
+ {n:"Engagement",w:"in the middle",d:"The main activity that captures the attention of the participant",q:"Where is the real work, and who is doing it?"},
+ {n:"Exit",w:"as it ends",d:"The clear end of the experience",q:"How do people make meaning of what happened?"},
+ {n:"Extension",w:"a month later, when it crosses their mind",d:"A physical or digital object to take home and remember the experience",q:"What is still true a month later?"}];
+var MEANINGS=["Accomplishment","Beauty","Community","Creation","Duty","Enlightenment","Freedom","Harmony","Justice","Oneness","Redemption","Security","Truth","Validation","Wonder"];
+var LEVELS=[["peak","Peak"],["high","High"],["mid","Middle"],["low","Low"],["trough","Trough"]];
+var LY={peak:165,high:195,mid:225,low:255,trough:285};
+var STAGES=[
+ {id:"mo",name:"Meaningful Outcomes",steps:["ambition","shift","meanings","behaviour"]},
+ {id:"em",name:"Emotions",steps:["feel0","feel1","feel2","feel3","feel4"]},
+ {id:"wh",name:"What Happens",steps:["moves0","moves1","moves2","moves3","moves4"]}];
+var ORDER=STAGES.reduce(function(a,s){return a.concat(s.steps)},[]);
+function blankTps(){return[[{name:"",moves:""}],[{name:"",moves:""}],[{name:"",moves:""}],[{name:"",moves:""}],[{name:"",moves:""}]]}
+var EMPTY={title:"",meta:"",ambition:"",from:"",to:"",meanings:[],behaviour:"",feel:["","","","",""],level:["","","","",""],tps:null,accepted:{},pushed:{},skipped:{},coachMsg:{},active:"",flash:""};
+var SCEN={
+ offsite:{label:"Offsite, first message",d:{title:"Leadership offsite",meta:"Two days, twelve senior managers",from:"They don't really want to be there"}},
+ agenda:{label:"Agenda pasted in",d:{title:"Q3 team day",meta:"One day, forty people",tps:[[{name:"",moves:"Calendar invite with the agenda attached"}],[{name:"",moves:"Coffee and pastries\nCEO welcome and strategy update"}],[{name:"Morning",moves:"Breakouts on Q3 priorities"},{name:"Afternoon",moves:"Lunch\nReport back from each table"}],[{name:"",moves:"Q&A with leadership\nNext steps slide"}],[{name:"",moves:"Slides shared by email"}]],accepted:{moves0:1,moves1:1,moves2:1,moves3:1,moves4:1}}},
+ blank:{label:"Blank",d:{}}};
+var state;
+try{state=JSON.parse(document.getElementById("map-state").textContent)}catch(e){state=null}
+if(!state)state=scenarioState("blank",true,false);
+normalise();
+var art=null,smp=null,capsKnown=false,saveTimer=null,readOnly=false,nudge="";
+
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function normalise(){
+ for(var k in EMPTY)if(state[k]==null)state[k]=clone(EMPTY[k]);
+ if(!state.tps){state.tps=blankTps();if(Array.isArray(state.moves))state.moves.forEach(function(m,i){state.tps[i][0].moves=m||""})}
+ delete state.moves;
+ state.tps.forEach(function(t,i){if(!t||!t.length)state.tps[i]=[{name:"",moves:""}]});
+ if(!Array.isArray(state.meanings))state.meanings=[];
+ state.meanings=state.meanings.filter(Boolean);
+ if(state.coach==null)state.coach=true;
+}
+function scenarioState(k,coach,lab){var s=clone(EMPTY);s.tps=blankTps();var d=clone(SCEN[k].d);for(var x in d)s[x]=d[x];s.scenario=k;s.coach=coach!==false;s.lab=lab!==false;return s}
+function $(id){return document.getElementById(id)}
+function wc(s){return(s||"").trim().split(/\s+/).filter(Boolean).length}
+function h(tag,a){var e=document.createElement(tag);if(a)for(var k in a){var v=a[k];if(v==null||v===false)continue;if(k==="text")e.textContent=v;else if(k.slice(0,2)==="on")e.addEventListener(k.slice(2),v);else e.setAttribute(k,v===true?"":v)}for(var i=2;i<arguments.length;i++){var c=arguments[i];if(c==null)continue;(Array.isArray(c)?c:[c]).forEach(function(x){if(x!=null)e.appendChild(typeof x==="string"?document.createTextNode(x):x)})}return e}
+var NS="http://www.w3.org/2000/svg";
+function s(tag,a,txt){var e=document.createElementNS(NS,tag);for(var k in a)if(a[k]!=null)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;return e}
+function lines(t){return(t||"").split("\n").map(function(x){return x.trim()}).filter(Boolean)}
+function allMoves(i){return state.tps[i].reduce(function(a,t){return a.concat(lines(t.moves))},[])}
+
+/* ---------- status ---------- */
+var CAT=/^(i feel\s+)?(safe|comfortable|engaged|energi[sz]ed|inspired|welcome|welcomed|good|great|happy|excited|curious|motivated|included|connected|seen|heard|relaxed|fine|ok|okay|valued|empowered)\.?$/i;
+function idx(k){return +k.slice(-1)}
+function status(k){
+ if(k==="ambition"||k==="behaviour"){var t=state[k];return!t.trim()?"empty":wc(t)<6?"thin":"filled"}
+ if(k==="shift"){var f=state.from.trim(),t2=state.to.trim();return(!f&&!t2)?"empty":(!f||!t2)?"thin":(wc(f)<2||wc(t2)<2)?"thin":"filled"}
+ if(k==="meanings"){var n=state.meanings.length;return n===0?"empty":n<3?"thin":"filled"}
+ if(k.indexOf("feel")===0){var v=state.feel[idx(k)].trim();if(!v)return"empty";return(!/^i feel\b/i.test(v)||CAT.test(v)||wc(v)<5)?"thin":"filled"}
+ var L=allMoves(idx(k));return!L.length?"empty":L.some(function(l){return wc(l)>=3})?"filled":"thin";
+}
+function isDone(k){return!!state.accepted[k]}
+function stageOf(k){for(var i=0;i<STAGES.length;i++)if(STAGES[i].steps.indexOf(k)>-1)return STAGES[i];return STAGES[0]}
+function stageDone(st){return st.steps.every(isDone)}
+function firstOpen(){for(var i=0;i<ORDER.length;i++)if(!isDone(ORDER[i]))return ORDER[i];return""}
+function active(){if(state.active&&ORDER.indexOf(state.active)>-1)return state.active;return firstOpen()}
+function doneCount(){return ORDER.filter(isDone).length}
+
+/* ---------- copy for steps ---------- */
+function stepLabel(k){
+ if(k==="ambition")return"The ambition";if(k==="shift")return"The core shift";if(k==="meanings")return"Three Meaningful Outcomes";if(k==="behaviour")return"The behaviour that shows it worked";
+ return PH[idx(k)].n;
+}
+function stepQ(k){
+ if(k==="ambition")return{q:"If this went really well, what happened?",why:"No limits yet. Let it be grand; the constraints come back at the very end."};
+ if(k==="shift")return{q:"What is the core shift, from where people are now to where you want them?",why:"The pair is the point. The “from” is the half most people skip, and it is where the design gets its grip."};
+ if(k==="meanings")return{q:"Which three Meaningful Outcomes is this experience really for?",why:"Three, not one and not eight. The choosing is where you find out what it is for."};
+ if(k==="behaviour")return{q:"It is the Friday after and it worked. What do you see someone doing that you would not have seen before?",why:"This makes the outcomes checkable."};
+ var i=idx(k),p=PH[i];
+ if(k.indexOf("feel")===0)return{q:p.n+": what do you want them to feel "+p.w+"?",why:"Write it in their voice, starting “I feel…”. Two feelings at once is often the truest. Then set how high it sits on the journey."};
+ return{q:p.n+": what has to happen so they feel that?",why:(state.feel[i].trim()?"You want: “"+state.feel[i].trim()+"”. ":"")+"One move per line. Add touchpoints if this phase has more than one moment."};
+}
+function localPush(k){
+ if(k==="ambition")return"Go bigger. If this went better than you dare hope, what would people say about it afterwards?";
+ if(k==="shift"){if(!state.to.trim())return"You have where they start. Where do you want them to end up?";if(!state.from.trim())return"You have the destination. Where are people honestly starting from?";return"Can you say both halves as a movement: from what, to what?"}
+ if(k==="meanings")return state.meanings.length?"Pick all three. If you could only keep one, which would you fight for?":"Which of these would you be sad to lose if the day went badly?";
+ if(k==="behaviour")return"What exactly would you see one person doing on the Friday after?";
+ if(k.indexOf("feel")===0){var v=state.feel[idx(k)].trim();if(!/^i feel\b/i.test(v))return"Say it in their voice. Finish the sentence: “I feel…”";var w=v.replace(/^i feel\s+/i,"").replace(/\.$/,"");if(CAT.test(v))return"“"+w+"” as in what, exactly? Those can be very different rooms.";return"And what else, at the same time? The honest ones usually have two."}
+ return"Say a little more: what actually happens, and who is doing it?";
+}
+
+/* ---------- icons ---------- */
+function icon(id){
+ var v=s("svg",{viewBox:"0 0 16 16","aria-hidden":"true"});
+ if(id==="mo"){v.appendChild(s("circle",{cx:8,cy:8,r:6.5,fill:"none",stroke:"currentColor","stroke-width":1.5}));v.appendChild(s("circle",{cx:8,cy:8,r:3.5,fill:"none",stroke:"currentColor","stroke-width":1.5}));v.appendChild(s("circle",{cx:8,cy:8,r:1,fill:"currentColor"}))}
+ else if(id==="em")v.appendChild(s("path",{d:"M8 13.5S2 10 2 5.8A3.2 3.2 0 0 1 8 4.2a3.2 3.2 0 0 1 6 1.6C14 10 8 13.5 8 13.5z",fill:"none",stroke:"currentColor","stroke-width":1.5,"stroke-linejoin":"round"}));
+ else if(id==="wh")v.appendChild(s("path",{d:"M5 8.5V3.5a1 1 0 0 1 2 0V8M7 7.5V2.5a1 1 0 0 1 2 0v5M9 7.5v-4a1 1 0 0 1 2 0v5.5M11 8.5V6a1 1 0 0 1 2 0v3.5c0 2.5-2 4.5-4.5 4.5S4.5 12.5 3.5 11L2.3 9.2a1 1 0 0 1 1.6-1.2L5 9.3",fill:"none",stroke:"currentColor","stroke-width":1.3,"stroke-linecap":"round","stroke-linejoin":"round"}));
+ else v.appendChild(s("path",{d:"M4 8.5l2.5 2.5L12 5.5",fill:"none",stroke:"currentColor","stroke-width":2,"stroke-linecap":"round","stroke-linejoin":"round"}));
+ return v;
+}
+
+/* ---------- render ---------- */
+function render(){
+ var app=$("app");app.textContent="";
+ var k=active(),st=k?stageOf(k):null;
+ var wrap=h("div",{class:"wrap"});
+ var layout=h("div",{class:"layout"});
+ layout.appendChild(mapPanel(st));
+ layout.appendChild(stepsPanel(k));
+ wrap.appendChild(layout);
+ wrap.appendChild(h("textarea",{id:"copy-area",class:"copy-area",hidden:true,readonly:true,"aria-label":"Map as text"}));
+ app.appendChild(wrap);
+ drawAll();
+ var f=$("work-input");if(f&&f.dataset.autofocus)f.focus({preventScroll:true});
+}
+function mapPanel(st){
+ var m=h("section",{class:"map",id:"map","data-stage":st?st.id:"done","aria-label":"5E Experience Design Journey Map"});
+ m.appendChild(h("div",{class:"title-row"},
+  h("span",{class:"label",text:"5E Journey"}),
+  h("input",{id:"f-title",class:"title-in",value:state.title,placeholder:"Name the project","aria-label":"Project name",oninput:function(){state.title=this.value},onchange:queueSave}),
+  h("input",{id:"f-meta",class:"meta-in",value:state.meta,placeholder:"Who, how many, how long","aria-label":"Format",oninput:function(){state.meta=this.value},onchange:queueSave}),
+  h("p",{class:"tagline",text:"A journey map is not a template you fill, but a structure that you decide."})));
+ m.appendChild(h("div",{class:"mo-lines",id:"mo-lines"}));
+ m.appendChild(h("section",{class:"overview","aria-label":"Where to put your attention"},
+  h("div",{class:"ov-head"},h("h2",{text:"Where to put your attention"}),h("div",{class:"legend"},h("span",{class:"l-f",text:"There"}),h("span",{class:"l-t",text:"Thin"}),h("span",{class:"l-e",text:"Empty"}))),
+  layerRow("mo","Meaningful Outcomes","c4"),layerRow("em","Emotions","c5"),layerRow("wh","What Happens","c5")));
+ m.appendChild(h("p",{class:"state-line",id:"state-line",hidden:true,text:"Moves only: the Meaningful Outcomes and the emotional journey for this experience have not been designed yet."}));
+ m.appendChild(s("svg",{id:"arch",class:"arch",viewBox:"0 0 1000 440",role:"img","aria-label":"The 5E model: Meaningful Outcomes arching over the five phases, with the emotional journey inside"}));
+ m.appendChild(h("div",{class:"cols",id:"cols"}));
+ m.appendChild(h("div",{class:"foot"},"Designed with the ",h("strong",{text:"5E Experience Design Model"}),", created by Andy Sontag · ",h("a",{href:"https://andysontag.com/5e-model",target:"_blank",rel:"noopener",text:"andysontag.com/5e-model"})));
+ return m;
+}
+function layerRow(id,name,cls){return h("div",{class:"layer"},h("span",{class:"layer-name"},icon(id),name),h("div",{class:"cells "+cls,id:"cells-"+id}))}
+function stepsPanel(k){
+ var p=h("aside",{class:"steps","aria-label":"Your steps"});
+ var n=doneCount(),tot=ORDER.length;
+ p.appendChild(h("div",{class:"steps-top"},h("h2",{text:"Your 5E Journey"}),h("span",{class:"stage-count",text:n+" of "+tot})));
+ p.appendChild(h("div",{class:"bar","aria-hidden":"true"},h("i",{style:"width:"+Math.round(n/tot*100)+"%"})));
+ if(state.flash)p.appendChild(h("div",{class:"flash",role:"status",text:state.flash}));
+ STAGES.forEach(function(st){
+  var isAct=k&&stageOf(k).id===st.id,dn=stageDone(st),cnt=st.steps.filter(isDone).length;
+  var box=h("div",{class:"stage"+(isAct?" active":"")+(dn?" done":"")});
+  box.appendChild(h("button",{class:"stage-head",type:"button","aria-expanded":isAct?"true":"false",onclick:function(){var t=st.steps.filter(function(x){return!isDone(x)})[0]||st.steps[0];go(t)}},
+   h("span",{class:"stage-ico"},icon(dn?"done":st.id)),h("span",{class:"stage-name",text:st.name}),h("span",{class:"stage-count",text:cnt+"/"+st.steps.length})));
+  if(isAct){
+   if(st.id==="wh")box.appendChild(h("div",{class:"stage-intro"},
+     h("span",null,"You can use the 5E model as a high-level outline of an experience or, if you are ready to take the next step as an experience designer, add another level of detail with ",h("strong",{text:"touchpoints"}),"."),
+     h("span",null,"A journey map is not a result, but a tool for planning, testing and evolving your experience.")));
+   var ul=h("ul",{class:"substeps"});
+   st.steps.forEach(function(x){
+    var li=h("li",{class:"sub"+(isDone(x)?" done":"")+(x===k?" current":"")+(state.skipped[x]&&!isDone(x)?" skipped":"")});
+    var lbl=stepLabel(x);if(x.indexOf("moves")===0&&state.tps[idx(x)].length>1)lbl+=" · "+state.tps[idx(x)].length+" touchpoints";
+    li.appendChild(h("button",{class:"sub-btn",type:"button",onclick:function(){go(x)},"aria-current":x===k?"step":null},h("span",{class:"tick","aria-hidden":"true"}),lbl));
+    if(x===k)li.appendChild(workArea(x));
+    ul.appendChild(li);
+   });
+   box.appendChild(ul);
+  }
+  p.appendChild(box);
+ });
+ if(!k)p.appendChild(finishArea());
+ p.appendChild(h("div",{class:"save",id:"save-status",role:"status"}));
+ var set=h("div",{class:"settings"},h("label",null,h("input",{type:"checkbox",id:"f-coach",checked:state.coach?true:null,onchange:function(){state.coach=this.checked;render();queueSave()}})," Coach in the map"));
+ if(state.lab){set.appendChild(h("label",null,"Test scenario ",h("select",{id:"f-scenario","aria-label":"Test scenario",onchange:function(){state=scenarioState(this.value,state.coach,true);render();queueSave()}},Object.keys(SCEN).map(function(x){var o=h("option",{value:x,text:SCEN[x].label});if(state.scenario===x)o.selected=true;return o}))))}
+ set.appendChild(h("button",{class:"link",type:"button",onclick:copyText,id:"b-copy",text:"Copy as text"}));
+ p.appendChild(set);
+ setTimeout(setStatus,0);
+ return p;
+}
+function workArea(k){
+ var w=h("div",{class:"work"}),c=stepQ(k);
+ w.appendChild(h("div",{class:"work-q",text:c.q}));
+ w.appendChild(h("div",{class:"work-why",text:c.why}));
+ var auto=!state.accepted[k]?"1":null;
+ if(k==="ambition"||k==="behaviour"){w.appendChild(h("textarea",{id:"work-input","data-autofocus":auto,"aria-label":stepLabel(k),oninput:function(){state[k]=this.value;liveUpdate()}},state[k]))}
+ else if(k==="shift"){w.appendChild(h("div",{class:"pair"},
+   h("input",{id:"work-input","data-autofocus":auto,value:state.from,placeholder:"From: where people are now","aria-label":"From",oninput:function(){state.from=this.value;liveUpdate()}}),
+   h("span",{class:"arrow","aria-hidden":"true",text:"↓"}),
+   h("input",{id:"f-to",value:state.to,placeholder:"To: where you want them","aria-label":"To",oninput:function(){state.to=this.value;liveUpdate()}})))}
+ else if(k==="meanings"){var ch=h("div",{class:"chips",role:"group","aria-label":"Meaningful Outcomes, choose three"});
+   MEANINGS.forEach(function(m){var on=state.meanings.indexOf(m)>-1;ch.appendChild(h("button",{class:"chip",type:"button","aria-pressed":on?"true":"false",onclick:function(){var i=state.meanings.indexOf(m);if(i>-1)state.meanings.splice(i,1);else if(state.meanings.length<3)state.meanings.push(m);else nudge="Three is the limit. Drop one to swap it.";render()},text:m}))});
+   w.appendChild(ch);w.appendChild(h("span",{class:"cite",text:"From Nathan Shedroff’s core meanings, Making Meaning (Diller, Shedroff & Rhea)."}))}
+ else if(k.indexOf("feel")===0){var i=idx(k);
+   w.appendChild(h("textarea",{id:"work-input","data-autofocus":auto,placeholder:"I feel…","aria-label":PH[i].n+" feeling",oninput:function(){state.feel[i]=this.value;liveUpdate()}},state.feel[i]));
+   var lv=h("div",{class:"levels",role:"group","aria-label":"Height on the journey"},h("span",{class:"label",text:"How high on the journey"}));
+   LEVELS.forEach(function(L){lv.appendChild(h("button",{class:"chip",type:"button","aria-pressed":state.level[i]===L[0]?"true":"false",onclick:function(){state.level[i]=state.level[i]===L[0]?"":L[0];render()},text:L[1]}))});
+   w.appendChild(lv)}
+ else{var j=idx(k),tps=state.tps[j],multi=tps.length>1;
+   tps.forEach(function(tp,t){
+    var box=h("div",{class:multi?"tp-edit":null});
+    if(multi)box.appendChild(h("div",{class:"row"},h("input",{id:"tp-name-"+j+"-"+t,value:tp.name,placeholder:"Touchpoint "+(t+1)+": give it a name","aria-label":"Touchpoint "+(t+1)+" name",oninput:function(){tp.name=this.value;liveUpdate()}}),
+      h("button",{class:"tp-del",type:"button",onclick:function(){tps.splice(t,1);render()},text:"Remove"})));
+    box.appendChild(h("textarea",{id:t===0?"work-input":"tp-moves-"+j+"-"+t,"data-autofocus":t===0?auto:null,placeholder:"One move per line","aria-label":(multi?(tp.name||"Touchpoint "+(t+1)):PH[j].n)+" moves",oninput:function(){tp.moves=this.value;liveUpdate()}},tp.moves));
+    w.appendChild(box);
+   });
+   w.appendChild(h("button",{class:"add-tp",type:"button",onclick:function(){tps.push({name:"",moves:""});render();var el=$("tp-name-"+j+"-"+(tps.length-1));if(el)el.focus()},text:"+ Add a touchpoint to "+PH[j].n}));
+ }
+ if(state.coachMsg[k])w.appendChild(h("div",{class:"coach-say",role:"status"},h("span",{class:"who",text:"Coach"}),h("span",{id:"coach-text",text:state.coachMsg[k]})));
+ if(nudge){w.appendChild(h("div",{class:"nudge",role:"status",text:nudge}));nudge=""}
+ w.appendChild(h("div",{class:"actions"},
+  h("button",{class:"primary",type:"button",id:"b-done",onclick:function(){done(k)},text:state.pushed[k]&&state.coachMsg[k]?"Keep it and move on":"Done"}),
+  state.coach?h("button",{class:"secondary",type:"button",onclick:function(){ask(k,false)},text:"Ask the coach"}):null,
+  h("button",{class:"link",type:"button",onclick:function(){skip(k)},text:"Skip for now"})));
+ return w;
+}
+function finishArea(){
+ return h("div",{class:"finish"},h("h3",{text:"Your journey map is complete"}),
+  h("p",{class:"work-why",text:"Read the arch from left to right: does what happens in each phase actually produce the feeling you named for it?"}),
+  h("p",{class:"work-why",text:"A journey map is not a result, but a tool for planning, testing and evolving. Take it back to the chat and say “read my map” for a second look, or “spar with me” to have it attacked."}),
+  h("div",{class:"actions"},h("button",{class:"primary",type:"button",onclick:copyText,text:"Copy as text"})));
+}
+function liveUpdate(){drawAll();var b=$("b-done");if(b)b.textContent="Done"}
+
+/* ---------- overview, arch, columns ---------- */
+function drawAll(){drawOverview();drawArch();renderMoLines();renderCols();var sl=$("state-line");if(sl)sl.hidden=!threshold()}
+function drawOverview(){
+ var k=active();
+ [["mo",["ambition","shift","meanings","behaviour"],["Ambition","Shift","3 Meanings","Behaviour"]],["em",STAGES[1].steps,PH.map(function(p){return p.n})],["wh",STAGES[2].steps,PH.map(function(p){return p.n})]].forEach(function(row){
+  var box=$("cells-"+row[0]);if(!box)return;box.textContent="";
+  row[1].forEach(function(x,i){
+   var st=status(x),extra=null;
+   if(x.indexOf("moves")===0&&state.tps[idx(x)].length>1)extra=h("small",{text:state.tps[idx(x)].length+" touchpoints"});
+   box.appendChild(h("button",{class:"cell"+(x===k?" here":""),"data-s":st,type:"button",title:stepLabel(x)+": "+({filled:"there",thin:"thin",empty:"empty"})[st],onclick:function(){go(x)}},h("span",{text:row[2][i]}),extra));
+  });
+ });
+}
+var CX=500,BY=410,RX=455,RY=330;
+function hx(i){return 140+180*i}
+function drawArch(){
+ var svg=$("arch");if(!svg)return;while(svg.firstChild)svg.removeChild(svg.firstChild);
+ var k=active();
+ var defs=s("defs",{});
+ var g=s("linearGradient",{id:"moGrad",x1:"0",x2:"1",y1:"0",y2:"0"});
+ [["0%",0],["14%",1],["86%",1],["100%",0]].forEach(function(st){g.appendChild(s("stop",{offset:st[0],style:"stop-color:var(--mo);stop-opacity:"+st[1]}))});
+ defs.appendChild(g);
+ defs.appendChild(s("path",{id:"moPath",d:"M"+(CX-RX)+","+BY+" A"+RX+" "+RY+" 0 0 1 "+(CX+RX)+","+BY}));
+ svg.appendChild(defs);
+ // Meaningful Outcomes band
+ var gmo=s("g",{class:"g-mo"});
+ var moSt=["ambition","shift","meanings","behaviour"],moDone=moSt.every(isDone),moAny=moSt.some(function(x){return status(x)!=="empty"});
+ var band=s("use",{href:"#moPath",class:"band",style:"stroke:"+(moAny||moDone?"url(#moGrad)":"var(--sunk)")+";opacity:"+(moDone?1:moAny?.55:1)});
+ gmo.appendChild(band);
+ if(!moAny&&!moDone)gmo.appendChild(s("use",{href:"#moPath",style:"fill:none;stroke:var(--empty);stroke-width:1.5;stroke-dasharray:6 8"}));
+ var txt=state.meanings.length===3&&isDone("meanings")?state.meanings.join("  ·  ").toUpperCase():"MEANINGFUL OUTCOMES";
+ var t=s("text",{class:"band-text",dy:"9",style:"fill:"+(moAny||moDone?"var(--on-mo)":"var(--ink-3)")});
+ var tp=s("textPath",{href:"#moPath",startOffset:"50%","text-anchor":"middle"},txt);t.appendChild(tp);gmo.appendChild(t);
+ if(k&&stageOf(k).id==="mo")gmo.appendChild(s("use",{href:"#moPath",style:"fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:3 6;transform:translateY(-34px)"}));
+ gmo.style.cursor="pointer";gmo.addEventListener("click",function(){go("ambition")});
+ svg.appendChild(gmo);
+ // five phase arrows
+ var gwh=s("g",{class:"g-wh"}),r=72,phi=25*Math.PI/180;
+ PH.forEach(function(p,i){
+  var cx=hx(i),has=allMoves(i).length>0,here=k==="moves"+i||k==="feel"+i;
+  var col=here?"var(--accent)":has?"var(--ink)":"var(--rule)";
+  var ex=cx+r*Math.cos(phi),ey=BY-10-r*Math.sin(phi);
+  var path=s("path",{d:"M"+(cx-r)+","+(BY-10)+" A"+r+" "+r+" 0 0 1 "+ex.toFixed(1)+","+ey.toFixed(1),class:"hump",style:"stroke:"+col});
+  var dx=Math.sin(phi),dy=Math.cos(phi),px=-dy,py=dx;
+  var tipX=ex+dx*30,tipY=ey+dy*30,aX=ex+px*26,aY=ey+py*26,bX=ex-px*26,bY=ey-py*26;
+  var head=s("polygon",{points:[aX,aY,tipX,tipY,bX,bY].map(function(v){return v.toFixed(1)}).join(" "),class:"head",style:"fill:"+col});
+  [path,head].forEach(function(el){var ti=document.createElementNS(NS,"title");ti.textContent=p.n;el.appendChild(ti);el.addEventListener("click",function(){go((stageOf(k||"moves0").id==="em"?"feel":"moves")+i)});gwh.appendChild(el)});
+ });
+ svg.appendChild(gwh);
+ // emotions curve
+ var gem=s("g",{class:"g-em"}),pts=PH.map(function(p,i){var lv=state.level[i];return{x:CX+(hx(i)-CX)*.55,y:lv?LY[lv]:LY.mid,set:!!lv,i:i}});
+ pts.forEach(function(pt){gem.appendChild(s("line",{x1:hx(pt.i),y1:BY-10-r-22,x2:pt.x,y2:pt.y+12,class:"guide"}))});
+ for(var i=0;i<pts.length-1;i++){var a=pts[i],b=pts[i+1],mx=(a.x+b.x)/2;gem.appendChild(s("path",{d:"M"+a.x+","+a.y+" C"+mx+","+a.y+" "+mx+","+b.y+" "+b.x+","+b.y,class:"curve"+(a.set&&b.set?"":" dash")}))}
+ pts.forEach(function(pt){
+  if(k==="feel"+pt.i)gem.appendChild(s("circle",{cx:pt.x,cy:pt.y,r:16,class:"here-ring"}));
+  var c=s("circle",{cx:pt.x,cy:pt.y,r:pt.set?10:8,class:"dot"+(pt.set?"":" unset"),style:pt.set?"fill:var(--p"+(pt.i+1)+");stroke:var(--p"+(pt.i+1)+")":null});
+  var ti=document.createElementNS(NS,"title");ti.textContent=PH[pt.i].n+(state.feel[pt.i].trim()?": "+state.feel[pt.i].trim():"");c.appendChild(ti);
+  c.addEventListener("click",function(){go("feel"+pt.i)});gem.appendChild(c)});
+ gem.appendChild(s("text",{x:CX,y:152,"text-anchor":"middle",class:"em-label"},"EMOTIONAL JOURNEY"));
+ svg.appendChild(gem);
+}
+function renderMoLines(){
+ var box=$("mo-lines");if(!box)return;box.textContent="";
+ if(state.ambition.trim())box.appendChild(h("div",{class:"quote",text:"“"+state.ambition.trim()+"”"}));
+ if(state.from.trim()||state.to.trim())box.appendChild(h("div",null,h("b",{text:"From "}),state.from.trim()||"…",h("b",{text:" to "}),state.to.trim()||"…"));
+ if(state.behaviour.trim())box.appendChild(h("div",null,h("b",{text:"You’ll know when: "}),state.behaviour.trim()));
+}
+function renderCols(){
+ var box=$("cols");if(!box)return;box.textContent="";
+ PH.forEach(function(p,i){
+  var col=h("div",{class:"col"},
+   h("button",{class:"col-name",type:"button",onclick:function(){go("moves"+i)},text:p.n}),
+   h("span",{class:"col-desc",text:p.d}));
+  col.appendChild(state.feel[i].trim()?h("span",{class:"col-feel",text:state.feel[i].trim()}):h("span",{class:"muted",text:"Feeling not named yet"}));
+  var tps=state.tps[i],n=allMoves(i).length;
+  if(n||tps.length>1){
+   var det=h("details",{class:"tps",id:"tps-"+i,open:tps.length>1?true:null},h("summary",{text:tps.length>1?tps.length+" touchpoints":n+(n===1?" move":" moves")}));
+   tps.forEach(function(tp,t){var L=lines(tp.moves);det.appendChild(h("div",{class:tps.length>1?"tp":null},tps.length>1?h("div",{class:"tp-name",text:tp.name||"Touchpoint "+(t+1)}):null,L.length?h("ul",null,L.map(function(x){return h("li",{text:x})})):h("span",{class:"muted",text:"Nothing yet"})))});
+   col.appendChild(det);
+  }else col.appendChild(h("span",{class:"muted",text:"Nothing designed yet"}));
+  col.appendChild(h("button",{class:"add-tp-mini",type:"button",onclick:function(){if(allMoves(i).length||state.tps[i][0].name)state.tps[i].push({name:"",moves:""});go("moves"+i)},text:"+ Touchpoint"}));
+  box.appendChild(col);
+ });
+}
+function threshold(){
+ var top=!state.ambition.trim()&&!state.from.trim()&&!state.to.trim()&&!state.behaviour.trim()&&!state.meanings.length;
+ return top&&state.feel.every(function(x){return!x.trim()})&&PH.some(function(p,i){return allMoves(i).length>0});
+}
+
+/* ---------- flow ---------- */
+function go(k){state.active=k;state.flash="";render();var w=document.querySelector(".work");if(w&&window.innerWidth<1000)w.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})}
+function firstOpenAfter(k){var i=ORDER.indexOf(k);for(var j=i+1;j<ORDER.length;j++)if(!isDone(ORDER[j]))return ORDER[j];return firstOpen()}
+function advance(k){
+ var st=stageOf(k);state.accepted[k]=1;delete state.skipped[k];delete state.coachMsg[k];
+ var next=firstOpenAfter(k);
+ state.flash=stageDone(st)?st.name+" done. "+(next?"Now: "+stageOf(next).name+".":"Your map is complete."):"";
+ state.active=next;render();queueSave();
+}
+function done(k){
+ var st=status(k);
+ if(st==="empty"){nudge="Write something first, even rough. Or skip it for now.";render();return}
+ if(st==="thin"&&!state.pushed[k]&&state.coach){state.pushed[k]=1;ask(k,true);return}
+ advance(k);
+}
+function skip(k){state.skipped[k]=1;var n=firstOpenAfter(k);state.active=n===k?"":n;state.flash="";render();queueSave()}
+
+/* ---------- coach ---------- */
+function summary(){
+ var L=["Experience: "+(state.title||"(untitled)")+(state.meta?" ("+state.meta+")":""),"Ambition: "+(state.ambition||"(empty)"),"Shift: from "+(state.from||"(empty)")+" to "+(state.to||"(empty)"),"Meaningful Outcomes: "+(state.meanings.join(", ")||"(none chosen)"),"Behaviour: "+(state.behaviour||"(empty)")];
+ PH.forEach(function(p,i){L.push(p.n+": feeling "+(state.feel[i]||"(empty)")+"; "+state.tps[i].map(function(tp,t){return(state.tps[i].length>1?(tp.name||"touchpoint "+(t+1))+": ":"")+(lines(tp.moves).join(" / ")||"(empty)")}).join("; "))});
+ return L.join("\n");
+}
+function current(k){if(k==="shift")return"from "+(state.from||"(empty)")+" to "+(state.to||"(empty)");if(k==="meanings")return state.meanings.join(", ")||"(none)";if(k.indexOf("feel")===0)return state.feel[idx(k)]||"(empty)";if(k.indexOf("moves")===0)return allMoves(idx(k)).join(" / ")||"(empty)";return state[k]||"(empty)"}
+function ask(k,isPush){
+ var fb=localPush(k);
+ if(!smp){state.coachMsg[k]=fb;render();return}
+ state.coachMsg[k]="Thinking…";render();
+ var prompt="You are the coach inside a 5E Experience Design Journey Map. The 5E model was created by Andy Sontag. A designer is filling in their own map, one step at a time.\n\nRules you must follow:\n- Reply with exactly ONE question, at most 25 words.\n- Never suggest wording, feelings, activities, formats or content. The design must stay theirs.\n- Never answer your own question.\n- Keep their own words; help them make those words more precise.\n- For an \"I feel...\" step, ask about the feeling, never about activities.\n- British English. No em dashes. No preamble.\n\n"+(isPush?"They pressed Done, but their answer is still thin. A good question here would be close in spirit to: \""+fb+"\"\n\n":"They asked you for a question to help them think.\n\n")+"The map so far:\n"+summary()+"\n\nThe step: "+stepLabel(k)+" ("+stepQ(k).q+")\nWhat they have written: "+current(k);
+ Promise.resolve(smp(prompt,{modelTier:"quick",cache:false,onText:function(u){var t=$("coach-text");if(t)t.textContent=u.text}})).then(function(r){state.coachMsg[k]=((r&&r.text)||fb).trim();render()}).catch(function(e){if(e&&e.code==="not_granted")smp=null;state.coachMsg[k]=fb;render()});
+}
+
+/* ---------- save ---------- */
+function setStatus(msg){var el=$("save-status");if(!el)return;if(msg){el.textContent=msg;return}
+ el.textContent=!capsKnown?"Connecting…":readOnly?"View only: your edits stay on this screen.":art?"Saves as you go.":"This copy cannot save. Use Copy as text to take your work back to the chat."}
+function queueSave(){if(!art||readOnly)return;clearTimeout(saveTimer);saveTimer=setTimeout(doSave,500)}
+function esc(x){return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function buildDoc(){
+ var hs=document.head.querySelector("style"),reset=hs?hs.textContent:"";
+ var json=JSON.stringify(state).replace(/</g,"\\u003c");
+ return"<!doctype html><html><head><meta charset=utf8><meta name=viewport content=\"width=device-width,initial-scale=1,viewport-fit=cover\"><style>"+reset+"</style></head><body><title>"+esc(document.title)+"</title>"+FONT_LINK+"<style id=\"map-css\">"+$("map-css").textContent+"</style><div id=\"app\"></div><script type=\"application/json\" id=\"map-state\">"+json+"<\/script><script id=\"map-js\">"+$("map-js").textContent+"<\/script></body></html>";
+}
+function doSave(){if(!art)return;setStatus("Saving…");
+ Promise.resolve(art.publish(buildDoc())).then(function(){setStatus("Saved.")}).catch(function(e){var c=e&&e.code;
+  if(c==="conflict")setStatus("Loading a newer version…");else if(c==="not_granted"||c==="not_writer"){readOnly=true;setStatus()}else setStatus("Could not save just now. Your work is still on screen.")})}
+
+/* ---------- copy ---------- */
+function copyText(){
+ var L=["5E Journey: "+(state.title||"untitled")+(state.meta?" ("+state.meta+")":""),"","MEANINGFUL OUTCOMES","Ambition: "+(state.ambition||"[empty]"),"Shift: from "+(state.from||"[empty]")+" to "+(state.to||"[empty]"),"Meaningful Outcomes: "+(state.meanings.join(", ")||"[none chosen]"),"Behaviour: "+(state.behaviour||"[empty]"),"","EMOTIONS AND WHAT HAPPENS"];
+ PH.forEach(function(p,i){L.push(p.n+" ("+(state.level[i]||"height not set")+")");L.push("  "+(state.feel[i].trim()||"I feel: [empty]"));
+  state.tps[i].forEach(function(tp,t){if(state.tps[i].length>1)L.push("  "+(tp.name||"Touchpoint "+(t+1))+":");var m=lines(tp.moves);L.push(m.length?m.map(function(x){return"    - "+x}).join("\n"):"    [empty]")})});
+ var txt=L.join("\n"),b=$("b-copy");
+ function fb(){var a=$("copy-area");a.hidden=false;a.value=txt;a.focus();a.select();if(b)b.textContent="Select and copy"}
+ try{navigator.clipboard.writeText(txt).then(function(){if(b){b.textContent="Copied";setTimeout(function(){b.textContent="Copy as text"},1500)}},fb)}catch(e){fb()}
+}
+
+/* ---------- boot ---------- */
+render();
+var c=window.claude;
+if(c&&typeof c.use==="function"){
+ Promise.all([Promise.resolve(c.use("artifact")).catch(function(){return null}),Promise.resolve(c.use("sample")).catch(function(){return null})]).then(function(r){art=r[0];smp=r[1];capsKnown=true;setStatus()});
+}else{capsKnown=true;setStatus()}
+})();
+</script>

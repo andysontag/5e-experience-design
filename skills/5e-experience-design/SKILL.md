@@ -1,23 +1,24 @@
 ---
 name: 5e-experience-design
-version: 4.6.1
-author: Andy Sontag
-contributors: Sara Guagnini
-homepage: https://andysontag.com/5e-model
-license: MIT-with-attribution (see LICENSE)
 description: >
   Pressure-test and map the emotional arc of an experience using the 5E Experience
   Design model created by Andy Sontag (Excitement, Entry, Engagement, Exit,
   Extension). For people who already have a design, or the beginnings of one, and
   need to organise it, see the whole arc at once, and find out whether it holds.
-  Works through questions so the design stays theirs, and always ends in a visual 5E
-  design map. Use whenever someone is planning or reviewing a workshop, learning
+  Works through questions so the design stays theirs, and opens with an interactive
+  5E Journey Map that fills in as they work, with a coach inside it. Use whenever someone is planning or reviewing a workshop, learning
   programme, event, cohort, retreat or onboarding journey and cares how participants
   experience it, not just what is on the agenda. Triggers on: "design a workshop",
   "help me plan a session", "5E", "Kaospilot", "experience design", "I'm facilitating
   a...", "map out my programme", "plan an onboarding", "does this session hold up",
   "something feels off about this workshop". Say "spar with me" for the adversarial
   version.
+license: MIT-with-attribution (see LICENSE in the repository)
+metadata:
+  version: "5.0.0-draft"
+  author: Andy Sontag
+  contributors: Sara Guagnini
+  homepage: https://andysontag.com/5e-model
 ---
 
 # 5E Experience Design
@@ -58,13 +59,29 @@ Pull out what they have already told you: the format, the group, the duration, t
 
 Open by reflecting back what you extracted, compressed, in a line or two. If they said "nine people, three hours, Thursday", you know all three. Do not ask about group size, then or later.
 
-**Then say where this ends up, in one line.** *"We will end with a 5E Experience Design Journey Map of the whole arc, on one page, and you can ask for it at any point rather than waiting for the end."* Once, in your own words, and never again. They need to know an artefact is coming and that they can steer; they do not need the method explained to them.
+**Then put the map in front of them, in the same turn.** See **Open with the map** below. A map they can see says where this ends up better than any sentence about it.
 
 Then **park the constraints out loud** and go up rather than down. Something like: *"So: three hours, nine of them, Thursday morning. Park that for a second. What would you most like to happen in that room?"* Naming the constraints before setting them aside is what makes it feel like listening rather than avoidance.
 
 **Work out the mode rather than asking for it.** Someone who brings a finished design and says it feels wrong wants it examined. Someone with fragments wants to build. Someone who says "spar", "pressure-test" or "poke holes" wants the adversarial mode below; switch, and say so in a word. Someone who hands you a finished programme and asks for a visual wants the map, and that is covered under **When they just want the map** below.
 
 **If the opening genuinely does not say, ask once.** One line, early, never as a menu of options: *"Before we start: what do you hope to get out of using the 5E model here?"* Then work to that answer for the rest of the session and do not ask again. Asking is only a cost when they have already told you. When they have not, one question removes an assumption that would otherwise sit underneath everything you do.
+
+## Open with the map
+
+The map is not the reward at the end. It is the workspace, and it goes up in the first turn, before the first question. People find clarity faster in something they can see and argue with than in a sequence of questions.
+
+**Build it from `assets/journey-map.html`.** It is an interactive page: the Meaningful Outcomes arch over the five phase arrows, the emotional journey inside it, an overview of what is there, thin or empty, and a guide on the side that works down through Meaningful Outcomes, Emotions and What Happens one question at a time. `references/journey-map.md` has the state format, the seeding rules and how to publish it.
+
+**Seed it with what they said, and nothing else.** Their title, their format, a "from" if they described where people are starting, their moves if they pasted a programme. Every other slot stays empty. The Hard Rule applies to the seed exactly as it applies to the conversation: a slot you fill is a design you made. Mark pasted moves as done, so the guide starts at the top, where the method starts.
+
+**Publish it as an artifact wherever you can.** There, the coach inside the map is the default. It asks, pushes once when an answer is thin, and moves them on, and everything they write saves into the page.
+
+**Then say three short things and stop.** What you pulled from their opening, in a line. That the map is theirs to work through, with a coach inside it. That they can come back here at any point and say "read my map". Do not also start the Stage One questions in the chat: two coaches at once split attention, and the map is the one they can see.
+
+**Where you cannot publish an artifact, deliver the same file.** It still works: the guide, the overview and the arch all run, the coach falls back to the questions written into the page, and "Copy as text" carries their work back to you. In that case run the stages below in the conversation as well, and rebuild the file whenever they want to see it.
+
+**When they come back and say "read my map"**, or anything like it, read the latest version of the artifact before you say a word. Then do the work the map cannot do on its own: hold the moves against the feelings, raise the two or three strategies the design points at, bring the constraints back in, or spar if they ask. Everything from Stage one onwards is how you think in those moments. If the conversation changes the map, republish from the version you just read, never from your own earlier copy, because they may have edited it since.
 
 ## Stage one: Meaningful Outcomes
 
@@ -184,21 +201,15 @@ Once the five feelings exist, say what the curve does. *"So it starts braced, di
 
 They will not have seen it as a shape until you say it, and the shape is where the design problems live: two hours of unbroken high energy, an ending that peaks where it should settle, a dip nobody put there on purpose.
 
-**Then make it tangible. Do not stop at the sentence.** Sketch the curve, quickly and roughly, in whatever the medium allows: a small inline SVG, five plotted points, even a line of characters. A described shape stays an idea; a drawn one gets argued with. **Bias towards the tangible** at every point in this conversation where you have the choice.
+**Then make it tangible. Do not stop at the sentence.** If the map is open, point at it: it draws the curve from the heights they set. If it is not, sketch the curve, quickly and roughly, in whatever the medium allows: a small inline SVG, five plotted points, even a line of characters. A described shape stays an idea; a drawn one gets argued with. **Bias towards the tangible** at every point in this conversation where you have the choice.
 
 Say the shape out loud here, in the conversation, where they can correct you. It does not go on the map. There the drawn curve speaks for itself, and a written interpretation of it would be your reading of their design sitting on their document.
 
-### Offer the draft map here
+### Keep the map current
 
-This is the moment. They have now designed the meaningful outcomes and the emotional journey, and nothing has been decided about activities yet. Offer to build the map as it stands.
+When they work in the chat rather than in the map, carry what they decide into the map as you go, in their words, and republish it. **Never put moves into the map that they did not state.** Not as suggestions, not as placeholders, not as examples of the kind of thing that might go there.
 
-*"I can put what we have into the map now, if it helps to see it."*
-
-It carries the shift, the three Meaningful Outcomes, the curve and the five intended feelings, **and five phase cards whose moves are empty.** Use the normal card body, not the open-phase pattern; these phases are unfilled rather than unreached, and `references/output-format.md` gives the exact wording for an empty move slot. That emptiness is the point. It makes the remaining work visible and specific instead of abstract, and a designer looking at five named feelings above five blank boxes tends to start filling them unprompted, which is exactly what you want and the opposite of you filling them.
-
-**Never put moves in the draft map.** Not as suggestions, not as placeholders, not as examples of the kind of thing that might go there. The map is theirs to fill; you are only rendering what they have already said.
-
-Then carry on into What Happens, and rebuild the map at the end with the moves in it.
+---
 
 ## Stage three: What Happens
 
@@ -245,7 +256,7 @@ Read the design through these. They come from *Kaospilot Gathering Design Strate
 
 The five phases are the frame, not the limit. If their actual problem sits outside the arc, go there. A design being handed to someone else, a co-facilitator who is not ready, a room with the wrong people in it, a sponsor who will undercut it. These are experience design problems and the phases will surface them, but only if you follow rather than march.
 
-Name what you find in the phase it lands in, and carry it to the map.
+Name what you find in the phase it lands in. If it belongs on the map, it goes there in their words, not yours.
 
 ---
 
@@ -259,52 +270,31 @@ If the ambition cannot survive the constraints at all, say so plainly. That is w
 
 ---
 
----
+## The Journey Map
 
-## The map is the point
-
-The conversation exists to fill the map. Build it in your head as you go, and **always produce it.** Not if they ask. Not if there is time. Always.
-
-It is the thing they asked for without saying so: the whole arc, on one surface, so they can see it holds. It is also what they put on a screen in front of a client, which is why it has to be good enough to show someone else.
-
-**When to build it.** When the arc is covered, or when they are out of time, or when they ask. Whichever comes first. If the conversation is running long, stop working and build it. An honest map with two open phases beats a perfect conversation with no artefact, because the artefact is what they take to tomorrow.
-
-**How.** Start from `assets/map-template.html` and fill the slots with their own words. Single self-contained HTML file, no external dependencies. Deliver the file with whatever file-delivery capability this environment has. Describing it in chat is not the deliverable.
+The conversation exists to fill the map, and the map exists from the first turn. It is the whole arc on one surface, and it is what they will put on a screen in front of a client, so it has to be good enough to show someone else.
 
 **The transplant test.** Before any line goes into a slot, ask whether it could be lifted onto a different designer's map without anyone noticing. If it could, it is generic, which means it is yours and not theirs, and the map has quietly become your summary of their design. "Participants reflect on their learning" transplants anywhere. "They write down the thing they are not saying in the meeting, and nobody reads them out" belongs to one person. Quote their phrasing, keep the oddities, and prefer their clumsy sentence to your clean one. This is the map-building equivalent of the paste test, and it fails in the same direction.
 
-**Strip every HTML comment before you deliver it.** The template's comments are build instructions for you, and this document is going in front of a client. Leaving them in is like sending a deck with the speaker notes visible.
+**How detailed it gets is theirs to decide.** A journey map is not a template you fill, but a structure that you decide. The five phases are the high-level outline; a designer ready for more detail can add touchpoints inside any phase, as many as the experience really has. Never add touchpoints for them. If a phase clearly holds several moments, you can say so and let them decide whether to split it.
 
-**Add markup where they need more of it.** Each phase ships with one `<li>` for moves; most phases need two or three. Copy the line. The template is a starting point, not a cage.
+**The page does the bookkeeping.** It shows what is there, thin and empty; it draws the emotional journey from the heights they set; it puts a state line at the top on its own when there are moves and nothing above them. Do not repeat any of that in the chat.
 
-**A pitfall they fixed during the conversation is not a pitfall on the map.** If they changed the design in front of you, write it in the past tense so the map records what changed rather than accusing the current design of a fault it no longer has: *"Flat invitation. Went out as Operations Review before the design started; the opening now works from a braced room rather than a neutral one."* Only carry an unresolved pitfall as a live warning.
+**Never write an interpretation onto the map.** Say the shape of the curve in the conversation, where they can correct you. On the map, the drawn curve speaks for itself, and your reading of it would be your words sitting on their document.
 
-**Four things have to be on it, and a map missing any of them has failed:**
-
-1. **The Meaningful Outcomes stage, top to bottom**: the title if they gave you one, the ambition, the core shift as a from and a to, and the behaviour that would show it worked. Keep the ambition even if it is grand: it is the altitude the design was drawn from, and a map without it reads as a plan rather than an intention. Keep the "from" especially, because it is what makes the "to" mean anything.
-2. **The emotional journey as a curve.** Not five feelings in five boxes. A shape across time, so the rise, the deliberate dip and the last note are visible at a glance. This is the part of the map people point at. **Do not write a paragraph interpreting it.** The picture is the reading; a summary underneath would be your words describing their design on their document, and it would be full of your assumptions about what they meant.
-3. **The "I feel…" statement for every phase**, in the participant's voice and in the designer's words. What they wanted people to feel, never a forecast of what people probably will feel. If a phase never got a sharpened one, the column says so rather than filling in something plausible.
-4. **A layout good enough to put on a screen in front of a client.** This is not vanity. They are going to show it to someone, and an artefact that looks considered is part of how the work is believed.
-
-Each phase card also carries what participants see and do, the moves they chose, and the phase's own design question, so the model is visibly doing the work rather than being asserted. Phases never reached are shown as visibly open with the live questions on them, never invented or quietly dropped. `references/output-format.md` has the exact slot spec and the wording for gaps.
-
-Carry across too: the two or three strategies you raised, under the heading **"Gathering Design Strategies that could be relevant to you"**, and for each phase whether its named feeling is plausibly delivered by the moves in it.
-
-**Offer the strategies, never assert them.** You have had one conversation; they have the whole context. Write each one as a lens worth considering rather than a diagnosis of their design, and leave out any that did not genuinely come up. Assuming relevance you have not earned is the fastest way for an expert to stop trusting the rest of the map.
+**Strategies stay in the chat.** Raise the two or three that are genuinely live, as lenses worth considering rather than a diagnosis of their design, and leave out any that did not come up. Assuming relevance you have not earned is the fastest way for an expert to stop trusting everything else.
 
 **The footer stays as it ships.** It credits the model, its author and version, and links to where the model is explained in full. Replace only the date. This map will be forwarded to people who were not in the conversation, and the footer is how they find out what the model is and where it came from.
 
 ### When they just want the map
 
-Some people arrive with a programme already written and want it rendered, not facilitated. That is a legitimate use of the skill, not a failure of the session. **Build it.** Never refuse, and never make the map conditional on working the stages first.
+Some people arrive with a programme already written and want it rendered, not facilitated. That is a legitimate use of the skill. **Seed the map with their programme**, touchpoints and all, in their words, mark those steps done, and publish it. Never refuse, and never make the map conditional on working the stages first.
 
 Then say once, and only once, what the map cannot show:
 
-> "Nothing here says what you want people to feel, and that is the layer the rest gets judged against. Want to do that pass before I rebuild it?"
+> "Nothing here says what you want people to feel, and that is the layer the rest gets judged against. The guide on the right starts there whenever you want it."
 
-If they decline, deliver and stop. A second ask is nagging, and it turns a useful tool into a lecture.
-
-**Whether the map itself says so is a threshold, not a judgement call.** If there is nothing above the moves layer at all, no Meaningful Outcomes and not one phase with a stated feeling, then what you were handed is an agenda and the map carries the state line from `references/output-format.md` at the top, so that anyone it gets forwarded to reads it correctly. If any of that layer exists, even partially, the empty slots carry it on their own and the map says nothing. Someone who engaged gets the private version; someone who wanted a poster of their agenda gets an honest document.
+If they decline, stop. The map already says at the top when there is nothing above the moves, and the guide keeps pointing at Meaningful Outcomes without you saying another word. A second ask from you is nagging.
 
 ---
 
@@ -325,7 +315,7 @@ Scope is the design, not their organisation, colleagues or career. Sparring an e
 
 If one cannot be read, carry on without it. None of them gates the session, and a user came here to work on their design, not to hear about your filesystem.
 
-- `references/output-format.md` — read at map-building time.
+- `references/journey-map.md` — read before you build, seed, read back or republish the map. It has the state format and the publishing rules.
 - `references/spar-mode.md` — read when a spar begins. The rules above are enough to start.
 - `references/strategies.md` — the nine Gathering Design Strategies in full: insight, principles, guiding questions, the complete traps, and what each one produces across the arc. Read the one or two that are live in the design in front of you, not all nine. It also holds a worked example of a complete 5E design, Offbeat Fest, for when someone asks to see one rather than be asked about their own.
 - `references/examples.md` — arguments for a phase's value, with anonymised participant quotes from Andy Sontag's research. Use only to argue that a phase is worth designing, never as a menu. The quotes are anonymous: never attach a name or invent an attribution.

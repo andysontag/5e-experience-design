@@ -22,15 +22,18 @@ If you want something to fill in five boxes for you, this is the wrong tool and 
 
 ## Install
 
+**In the Claude app or claude.ai** (most people):
+
+1. Download [5e-experience-design.zip](https://github.com/andysontag/5e-experience-design/raw/main/5e-experience-design.zip). Don't unzip it.
+2. In Settings, Capabilities, switch on "Code execution and file creation".
+3. Go to Customize, Skills, then + , Create skill, Upload a skill, and choose the file.
+4. Start a new chat and describe what you are designing.
+
+**In Claude Code**, run these one at a time:
+
 ```
 /plugin marketplace add andysontag/5e-experience-design
 /plugin install 5e-experience-design@andysontag
-```
-
-To pick up later releases:
-
-```
-/plugin update 5e-experience-design@andysontag
 ```
 
 Then just describe what you are planning:
@@ -63,7 +66,7 @@ Nine **Gathering Design Strategies** are available as lenses, each with the trap
 
 ## What you get
 
-A self-contained HTML **5E Experience Design Journey Map**: the ambition and the core shift, the Meaningful Outcomes, the emotional journey drawn as a curve running under an arc across all five phases, the "I feel…" statement and chosen moves for each phase, and the gaps left visibly open rather than invented.
+An interactive **5E Experience Design Journey Map**, from the first message. The Meaningful Outcomes arch over the five phases, the emotional journey drawn inside it, and an overview of what is there, thin or empty. A guide works through Meaningful Outcomes, Emotions and What Happens one question at a time, with a coach inside the map, and you can add touchpoints to any phase when you want more detail.
 
 The Meaningful Outcomes come from Nathan Shedroff's work on core meanings, in *Making Meaning* (Diller, Shedroff & Rhea); the 5E model builds on them.
 

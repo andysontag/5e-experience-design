@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.0.0-draft
+- **Visual first.** The skill opens with an interactive 5E Journey Map instead of ending with a static one.
+- **Coach inside the map.** A guide works through Meaningful Outcomes, Emotions and What Happens one step at a time, and pushes once when an answer is thin.
+- **Touchpoints.** Any phase can be split into as many touchpoints as the experience has.
+- **Upload route.** A ready-made zip for the Claude app and claude.ai, alongside the Claude Code plugin.
+- Replaces `assets/map-template.html` and `references/output-format.md` with `assets/journey-map.html` and `references/journey-map.md`.
+
 ## 4.6.1
 - Opening goal question reworded and de-timed: "what do you hope to get out of using the 5E model here?"
 - The artefact is named the **5E Experience Design Journey Map** in the intro line.
