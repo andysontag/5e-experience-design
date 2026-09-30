@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Experience design and learning transfer skills from Andy Sontag, creator of the 5E Experience Design model.",
-    "version": "4.6.1"
+    "version": "5.0.0-draft"
   },
   "plugins": [
     {
       "name": "5e-experience-design",
       "source": "./",
       "description": "Design and pressure-test the emotional arc of a workshop, programme, event or onboarding using the 5E Experience Design model. Works from ambition down to moves, designs the feelings before the activities, and always ends in a 5E Experience Design Journey Map.",
-      "version": "4.6.1",
+      "version": "5.0.0-draft",
       "author": {
         "name": "Andy Sontag",
         "url": "https://andysontag.com/5e-model"
